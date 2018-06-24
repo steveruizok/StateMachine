@@ -2,7 +2,7 @@
 
 **[@steveruizok](http://twitter.com/steveruizok)**
 
-A Framer module for building components driven by state machines. Easily define a component's states and the manage events that connect them. Inspired by [sketch.systems)](http://sketch.systems).
+A Framer module for building components driven by state machines. Easily define a component's states and the manage events that connect them. Inspired by [sketch.systems](http://sketch.systems).
 
 ## Contents:
 
