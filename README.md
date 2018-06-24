@@ -1,3 +1,10 @@
+<style>
+.tab-size-8 .blob-code {
+    -moz-tab-size: 4;
+    tab-size: 4;
+}
+</style>
+
 # StateMachine
 
 **[@steveruizok](http://twitter.com/steveruizok)**
