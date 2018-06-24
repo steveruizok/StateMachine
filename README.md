@@ -11,11 +11,8 @@ A Framer module for building components driven by state machines. Easily define 
 
 ## Contents:
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Demo: Toggle Button](#demo-toggle-button)
-- [Demo: Form](#demo-form)
-- [Documentation](#documentation)
+*   [Installation](#installation)
+*   [Documentation](#documentation)
 
 # Installation
 
