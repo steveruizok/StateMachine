@@ -200,9 +200,6 @@ stateMachine = new StateMachine
 		empty:
 			textEnter: "ready"
 			emptySubmit: "warn"
-		success:
-			textEnter: "ready"
-			emptySubmit: "warn"
 		warn:
 			textEnter: "ready"
 		ready:
@@ -211,6 +208,9 @@ stateMachine = new StateMachine
 		fetching:
 			error: "error"
 			success: "success"
+		success:
+			textEnter: "ready"
+			emptySubmit: "warn"
 		error:
 			textClear: "empty"
 			submit: "fetching"
