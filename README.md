@@ -5,17 +5,17 @@
 A Framer module for building components driven by state machines. Easily define a component's states and the manage events that connect them. Inspired by [sketch.systems](http://sketch.systems).
 
 <div style="text-align: center">
-	<img src="assets/code_snippet.png" alt="Form demo"/>
 	<img src="assets/form_demo_1.gif" alt="Form demo"/>
+	<img src="assets/code_snippet_1.png" alt="Form demo"/>
 </div>
 
 ## Contents:
 
-*   [Installation](#installation)
-*   [Usage](#usage)
-*   [Demo: Toggle Button](#demo-toggle-button)
-*   [Demo: Form](#demo-form)
-*   [Documentation](#documentation)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Demo: Toggle Button](#demo-toggle-button)
+- [Demo: Form](#demo-form)
+- [Documentation](#documentation)
 
 # Installation
 
