@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>default copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#7D7D7D" offset="0%"></stop>
+            <stop stop-color="#4C4C4C" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#ACACAC" offset="0%"></stop>
+            <stop stop-color="#636060" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-3" x="0" y="0" width="80" height="80" rx="16"></rect>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="3.061617e-15%" id="linearGradient-4">
+            <stop stop-color="#838282" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#929292" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#444444" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-7" cx="40" cy="40" r="20"></circle>
+        <path d="M80,0 L80,80 L0,80 L24.17997,55.82003 C23.9472695,53.6723675 24.1244259,52.3050296 24.7114391,51.7180164 C25.2984522,51.1310032 26.8423095,50.7773275 29.3430109,50.6569891 L80,0 Z" id="path-8"></path>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="3.061617e-15%" id="linearGradient-10">
+            <stop stop-color="#5D5D5D" offset="0%"></stop>
+            <stop stop-color="#4D4D4D" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-11" x="0" y="0" width="80" height="80" rx="16"></rect>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="72.6946351%" id="radialGradient-12">
+            <stop stop-color="#9BF990" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#9BF990" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="3.061617e-15%" id="linearGradient-13">
+            <stop stop-color="#9BF990" offset="0%"></stop>
+            <stop stop-color="#B7FFAF" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-14" cx="40" cy="40" r="20"></circle>
+        <polygon id="path-15" points="0 1.06666667 14.9333333 1.06666667 0 16"></polygon>
+        <polygon id="path-17" points="0 0 16 0 0 16"></polygon>
+    </defs>
+    <g id="default-copy-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2">
+            <g id="Rectangle" stroke-linejoin="square">
+                <rect stroke="url(#linearGradient-2)" stroke-width="3" fill="url(#linearGradient-1)" fill-rule="evenodd" x="1.5" y="1.5" width="77" height="77" rx="16"></rect>
+                <rect stroke="#000000" stroke-width="2" x="1" y="1" width="78" height="78" rx="16"></rect>
+            </g>
+            <g id="Oval">
+                <circle stroke="url(#linearGradient-4)" stroke-width="1" cx="40" cy="40" r="20.5"></circle>
+                <circle stroke="url(#linearGradient-5)" stroke-width="3" stroke-linejoin="square" cx="40" cy="40" r="18.5"></circle>
+                <circle stroke="url(#linearGradient-6)" stroke-width="2" stroke-linejoin="square" cx="40" cy="40" r="19"></circle>
+            </g>
+        </g>
+        <g id="Group">
+            <mask id="mask-9" fill="white">
+                <use xlink:href="#path-8"></use>
+            </mask>
+            <g id="Rectangle-2"></g>
+            <g id="Group-3" mask="url(#mask-9)">
+                <g id="Rectangle" stroke-linejoin="square">
+                    <rect stroke="url(#linearGradient-2)" stroke-width="3" fill="url(#linearGradient-10)" fill-rule="evenodd" x="1.5" y="1.5" width="77" height="77" rx="16"></rect>
+                    <rect stroke="#000000" stroke-width="2" x="1" y="1" width="78" height="78" rx="16"></rect>
+                </g>
+                <rect id="Rectangle" fill="url(#radialGradient-12)" x="0" y="0" width="80" height="80" rx="16"></rect>
+                <g id="Oval">
+                    <circle stroke="url(#linearGradient-13)" stroke-width="1" cx="40" cy="40" r="20.5"></circle>
+                    <circle stroke="#ACFFA2" stroke-width="3" stroke-linejoin="square" cx="40" cy="40" r="18.5"></circle>
+                    <circle stroke="#9BF990" stroke-width="2" stroke-linejoin="square" cx="40" cy="40" r="19"></circle>
+                </g>
+            </g>
+        </g>
+        <g id="Group-5" transform="translate(19.000000, 45.000000)">
+            <mask id="mask-16" fill="white">
+                <use xlink:href="#path-15"></use>
+            </mask>
+            <use id="Rectangle-3" fill="#9BF990" xlink:href="#path-15"></use>
+            <path d="M0.533333333,1.6 L14.4,1.6" id="Line" stroke="#ACFFA2" stroke-linecap="square" mask="url(#mask-16)"></path>
+        </g>
+        <g id="Group-6" transform="translate(45.000000, 19.000000)">
+            <mask id="mask-18" fill="white">
+                <use xlink:href="#path-17"></use>
+            </mask>
+            <use id="Rectangle-3" fill="#000000" transform="translate(8.000000, 8.000000) rotate(180.000000) translate(-8.000000, -8.000000) " xlink:href="#path-17"></use>
+            <path d="M15.4285714,15.4666667 L0.571428571,15.4666667" id="Line-2" stroke="#444444" stroke-linecap="square" mask="url(#mask-18)"></path>
+        </g>
+    </g>
+</svg>

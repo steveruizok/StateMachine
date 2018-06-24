@@ -6,7 +6,7 @@
   "contentScale" : 1,
   "cachedDeviceWidth" : 0,
   "deviceType" : "fullscreen",
-  "sharedPrototype" : 0,
+  "sharedPrototype" : true,
   "propertyPanelToggleStates" : {
 
   },
@@ -15,8 +15,8 @@
   "selectedHand" : "",
   "showBezel" : 0,
   "foldedCodeRanges" : [
-    "{656, 2478}",
-    "{3135, 4819}"
+    "{656, 2483}",
+    "{3140, 4890}"
   ],
   "deviceScale" : 1
 }

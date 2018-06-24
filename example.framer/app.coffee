@@ -1,7 +1,7 @@
 # StateMachine
 # @steveruizok
 
-{ StateMachine } = require "StateMachine"
+{ StateMachine } = require "statemachine"
 
 # StateMachine is a module that allows you to design state-based components. You'll create the machine by defining a set of "states". Each of these states may have one or more "events", and each event points to a different state ( the event's "target state"). 
 
@@ -32,7 +32,7 @@ toggleButton = new Layer
 	animationOptions: 
 		time: .25
 		
-# Let's also give the Layer some Framer states. These "layer states" are different from toggleMachine's "machine states". While tey don't affect the StateMachine in any way, we'll be using them below to show the machine's current state.
+# Let's also give the Layer some Framer states. These "layer states" are different from toggleMachine's "machine states". While they don't affect the StateMachine in any way, we'll be using them below to show the machine's current state.
 	
 toggleButton.states =
 	on:
@@ -51,7 +51,7 @@ toggleButton.stateSwitch("off")
 toggleButton.onTap =>
 	toggleMachine.handle("press")
 	
-# Now let's set an event listener on toggleMachine, so that we can do things in Framer when the the machine changes its state.
+# Finally, we'll set an event listener on toggleMachine so that we can do things in Framer when the the machine changes its state.
 
 toggleMachine.on "change:current", (state) ->
 	currentState.template = state
@@ -206,7 +206,7 @@ stateMachine = new StateMachine
 		warn:
 			textEnter: "ready"
 		ready:
-			emptySubmit: "warn"
+			textClear: "empty"
 			submit: "fetching"
 		fetching:
 			error: "error"
@@ -234,6 +234,7 @@ stateMachine.onChangeState (state) ->
 		when "empty"
 			layers.button.animate("disabled")
 		when "warn"
+			layers.button.animate("disabled")
 			layers.errorText.text = "You'll need to enter your name first."
 		when "ready"
 			null # matches default properties
@@ -242,6 +243,7 @@ stateMachine.onChangeState (state) ->
 			layers.buttonText.text = "..."
 			input.readOnly = true
 		when "success"
+			layers.button.animate("disabled")
 			layers.errorText.stateSwitch("success")
 			layers.errorText.text = "Thanks #{input.value}! We got your name ok."
 			input.value = ""
@@ -265,7 +267,7 @@ input.oninput = (event) ->
 	value = input.value
 	
 	if value.length is 0
-		stateMachine.handle("emptySubmit")
+		stateMachine.handle("textClear")
 		return
 		
 	stateMachine.handle("textEnter")

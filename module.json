@@ -1,0 +1,11 @@
+{
+  "name": "StateMachine",
+  "description": "Build better components with state machines.",
+  "author": "Steve Ruiz",
+
+  "require": "{ StateMachine } = require 'statemachine'",
+  "install": "statemachine.coffee",
+  "example": "example.coffee",
+
+  "thumb": "icon.png"
+}
