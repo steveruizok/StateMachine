@@ -1,10 +1,3 @@
-<style>
-.tab-size-8 .blob-code {
-    -moz-tab-size: 4;
-    tab-size: 4;
-}
-</style>
-
 # StateMachine
 
 **[@steveruizok](http://twitter.com/steveruizok)**
@@ -13,11 +6,11 @@ A Framer module for building components driven by state machines. Easily define 
 
 ## Contents:
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Demo: Toggle Button](#demo-toggle-button)
-- [Demo: Form](#demo-form)
-- [Documentation](#documentation)
+*   [Installation](#installation)
+*   [Usage](#usage)
+*   [Demo: Toggle Button](#demo-toggle-button)
+*   [Demo: Form](#demo-form)
+*   [Documentation](#documentation)
 
 # Installation
 
