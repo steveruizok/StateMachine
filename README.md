@@ -3,10 +3,9 @@
 **[@steveruizok](http://twitter.com/steveruizok)**
 
 A Framer module for building components driven by state machines. Easily define a component's states and the manage events that connect them. Inspired by [sketch.systems](http://sketch.systems).
-<div style="width: 100%; background: #1e1e1e; display: flex; align-items: center">
-	<img style="width:25%;" src="assets/code_snippet.png" alt="Form demo"/>
-	<img style="width:50%;" src="assets/form_demo_1.gif" alt="Form demo"/>
-</div>
+
+<img style="width:200px" src="assets/code_snippet.png" alt="Form demo"/>
+<img src="assets/form_demo_1.gif" alt="Form demo"/>
 
 ## Contents:
 
