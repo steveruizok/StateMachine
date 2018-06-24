@@ -4,17 +4,13 @@
 
 A Framer module for building components driven by state machines. Easily define a component's states and the manage events that connect them. Inspired by (sketch.systems)[http://sketch.systems].
 
-Contents:
+## Contents:
 
-### [Installation](#installation)
-
-### [Usage](#usage)
-
-### [Demo: Toggle Button](#demo-toggle-button)
-
-### [Demo: Form](#demo-form)
-
-### [Documentation](#documentation)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Demo: Toggle Button](#demo-toggle-button)
+- [Demo: Form](#demo-form)
+- [Documentation](#documentation)
 
 # Installation
 
@@ -109,7 +105,7 @@ toggleButton.onTap =>
 
 Finally, we'll set an event listener on toggleMachine so that we can do things in Framer when the the machine changes its state.
 
-```
+```coffeescript
 toggleMachine.on "change:current", (state) ->
 	currentState.template = state
 
@@ -169,7 +165,7 @@ formMachine = new StateMachine
 
 ## Methods
 
-| Name                  | Arguments            | Description                                                                                                    |
+| Name                  | Argument Types       | Description                                                                                                    |
 | --------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `handle(eventName)`   | `eventName : string` | Sends an event to the machine.                                                                                 |
 | `onChangeState(fn)`   | `fn: EventListener`  | Sets an event listener that fires when the machine's state changes. Alias for statemachine.on("change:state"). |
