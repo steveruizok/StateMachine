@@ -4,6 +4,18 @@
 
 A Framer module for building components driven by state machines. Easily define a component's states and the manage events that connect them. Inspired by (sketch.systems)[http://sketch.systems].
 
+Contents:
+
+### [Installation](#installation)
+
+### [Usage](#usage)
+
+### [Demo: Toggle Button](#demo-toggle-button)
+
+### [Demo: Form](#demo-form)
+
+### [Documentation](#documentation)
+
 # Installation
 
 ## Automatic
@@ -142,6 +154,28 @@ formMachine = new StateMachine
 ```
 
 ![alt text](assets/form_demo_1.gif "Form demo")
+
+# Documentation
+
+## Properties
+
+| Name           | Type            | Description                                                         | readonly |
+| -------------- | --------------- | ------------------------------------------------------------------- | -------- |
+| `state`        | `string`        | Gets and sets the machine's current state by its name (a `string`). | false    |
+| `current`      | `string`        | Returns the name of the machine's current state.                    | false    |
+| `initial`      | `string`        | Gets and sets the machine's initial state.                          | true     |
+| `history`      | `Array<string>` | Returns the machine's history.                                      | true     |
+| `historyIndex` | `number`        | Returns the machine's history index.                                | true     |
+
+## Methods
+
+| Name                  | Arguments            | Description                                                                                                    |
+| --------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `handle(eventName)`   | `eventName : string` | Sends an event to the machine.                                                                                 |
+| `onChangeState(fn)`   | `fn: EventListener`  | Sets an event listener that fires when the machine's state changes. Alias for statemachine.on("change:state"). |
+| `onChangeCurrent(fn)` | `fn: EventListener`  | Identical to onChangeState (redundancy).                                                                       |
+| `undo()`              | n/a                  | Moves the StateMachine to its previous state, if one exists.                                                   |
+| `redo()`              | n/a                  | Moves the StateMachine to its next state, if one exists.                                                       |
 
 # Contact
 
