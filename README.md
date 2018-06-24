@@ -4,6 +4,8 @@
 
 A Framer module for building components driven by state machines. Easily define a component's states and the manage events that connect them. Inspired by [sketch.systems](http://sketch.systems).
 
+![alt text](assets/form_demo_1.gif "Form demo")
+
 ## Contents:
 
 - [Installation](#installation)
@@ -149,7 +151,12 @@ formMachine = new StateMachine
 			submit: "fetching"
 ```
 
-![alt text](assets/form_demo_1.gif "Form demo")
+<div style="width: 100%; background: #1e1e1e; display: flex; align-items: center">
+	<img src="assets/code_snippet.png" style="width:45%" alt="Form demo"/>
+	<div style="height:100%; width: 45%; background: #FFF;">
+		<img src="assets/form_demo_1.gif" alt="Form demo"/>
+	</div>
+</div>
 
 # Documentation
 
