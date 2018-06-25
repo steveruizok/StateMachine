@@ -1,9 +1,9 @@
 # StateMachine
 # @steveruizok
 
-# StateMachine is a module that allows you to design state-based components. You'll create the machine by defining a set of "states". Each of these states may have one or more "events", and each event points to a different state ( the event's "target state"). 
+# StateMachine is a module that allows you to design state-based components. You'll create the machine by defining a set of "states". Each of these states may have one or more "actions", and each actions points to a different state ( the action's "target state"). 
 
-# The machine always has a "current state", either its "initial state" or a different state that it has changed to after recieving some event. When the machine recieves an event, it checks to see if its current state owns an event with that name. If it does, the machine changes its state to that event's target state.
+# The machine always has a "current state", either its "initial state" or a different state that it has changed to after recieving some actions. When the machine recieves an actions, it checks to see if its current state owns an actions with that name. If it does, the machine changes its state to that actions's target state.
 
 # @Properties
 
@@ -25,8 +25,8 @@
 
 # @Methods
 
-# handle( event : string )
-# 	Sends an event to the machine.
+# dispatch( action : string, payload: any )
+# 	Sends an action to the machine.
 
 # onChangeState( fn: EventListener )
 # 	Sets an event listener that fires when the machine's state changes.
@@ -58,7 +58,7 @@ class exports.StateMachine extends Framer.BaseClass
 	
 	# Private methods
 	
-	_setCurrent: (state, direction) =>
+	_setCurrent: (state, payload, direction) =>
 		return unless state?
 		
 		switch direction
@@ -68,12 +68,12 @@ class exports.StateMachine extends Framer.BaseClass
 				@_historyIndex++
 			else 
 				if @current?
-					@_addToHistory(@current)
+					@_addToHistory(@current, payload)
 					@_historyIndex++
 		
 		@_current = state
-		@emit("change:current", state.name, @)
-		@emit("change:state", state.name, @)
+		@emit("change:current", state.name, payload, @)
+		@emit("change:state", state.name, payload, @)
 	
 	_getCurrent: =>
 		return @_getState(@current)
@@ -92,44 +92,43 @@ class exports.StateMachine extends Framer.BaseClass
 		@_current = @states[0]
 		Utils.delay 0, => @_setCurrent(@states[0])
 		
-	_addToHistory: (stateName) =>
+	_addToHistory: (stateName, payload) =>
 		@_history = @_history.slice(0, @_historyIndex)
-		@_history.push(stateName)
+		@_history.push({name: stateName, payload: payload})
 	
-	_setState: (stateName, direction) =>
+	_setState: (stateName, payload, direction) =>
 		state = @_getState(stateName)
 		
 		unless state?
 			return;
 		
-		this._setCurrent(state, direction)
+		this._setCurrent(state, payload, direction)
 	
 	
 	# Public methods
 	
-	handle: (eventName) =>
+	dispatch: (actionName, payload) =>
 		current = @_getCurrent()
-		newStateName = current.events[eventName]
+		newStateName = current.actions[actionName]
 		
 		if _.isUndefined(newStateName)
 			return
 		
-		@_setState(newStateName)
+		@_setState(newStateName, payload)
 		
 	undo: =>
 		return if @_historyIndex is 0
-				
-		@_setState(@_history[@_historyIndex - 1], "undo")
+		
+		state = @_history[@_historyIndex - 1]
+		@_setState(state.name, state.payload, "undo")
 		
 	redo: =>
 		return if @_historyIndex is @_history.length
-		
-		@_setState(@_history[@_historyIndex + 1], "redo")
-	
-	onChangeCurrent: (fn) =>
-		@on("change:current", fn)
 
-	onChangeState: (fn) =>
+		state = @_history[@_historyIndex + 1]
+		@_setState(state.name, state.payload, "redo")
+
+	onStateChange: (fn) =>
 		@on("change:state", fn)
 		
 		
@@ -160,7 +159,7 @@ class exports.StateMachine extends Framer.BaseClass
 		get: -> @_states
 		set: (states) ->
 			newStates = _.map(states, (value, key) =>
-				return {name: key, events: value}
+				return {name: key, actions: value}
 				)
 			
 			@_states = newStates

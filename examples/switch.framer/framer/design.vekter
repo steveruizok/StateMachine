@@ -299,9 +299,7 @@
                     "top" : null,
                     "visible" : true,
                     "width" : 10,
-                    "widthFactor" : null,
-                    "x" : 14,
-                    "y" : 28
+                    "widthFactor" : null
                   }
                 ],
                 "clip" : false,
@@ -732,9 +730,7 @@
             "top" : null,
             "visible" : true,
             "width" : 101,
-            "widthFactor" : null,
-            "x" : 166,
-            "y" : 404
+            "widthFactor" : null
           },
           {
             "__class" : "TextNode",
@@ -851,9 +847,7 @@
             "top" : null,
             "visible" : true,
             "width" : 375,
-            "widthFactor" : null,
-            "x" : 166,
-            "y" : 404
+            "widthFactor" : null
           },
           {
             "__class" : "OvalShapeNode",
@@ -1015,9 +1009,7 @@
             "top" : null,
             "visible" : true,
             "width" : 85,
-            "widthFactor" : null,
-            "x" : 101,
-            "y" : 548
+            "widthFactor" : null
           },
           {
             "__class" : "OvalShapeNode",
@@ -1371,9 +1363,7 @@
             "top" : null,
             "visible" : true,
             "width" : 59,
-            "widthFactor" : null,
-            "x" : 181,
-            "y" : 642
+            "widthFactor" : null
           },
           {
             "__class" : "TextNode",
@@ -1484,9 +1474,7 @@
             "top" : null,
             "visible" : true,
             "width" : 59,
-            "widthFactor" : null,
-            "x" : 181,
-            "y" : 642
+            "widthFactor" : null
           },
           {
             "__class" : "PathNode",

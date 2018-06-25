@@ -13,14 +13,14 @@ machine = new StateMachine
 # [2] Events
 
 button_a.onTap =>
-	machine.handle("press_a")
+	machine.dispatch("press_a", new Date())
 	
 button_b.onTap =>
-	machine.handle("press_b")
+	machine.dispatch("press_b", new Date())
 
 # [4] Presentation Logic
 
-machine.on "change:state", (state) ->
+machine.on "change:state", (state, payload) ->
 	switch state
 		when "a"
 			button_a.animate
@@ -43,7 +43,10 @@ machine.on "change:state", (state) ->
 # Graph Logic
 
 
-machine.on "change:state", (state) ->
+machine.on "change:state", (state, date) ->
+	if date?
+		print date.toLocaleTimeString() +  ": changed state to " + state
+		
 	switch state
 		when "a"
 			a_to_b_arrow.fill = "#ff0400"
