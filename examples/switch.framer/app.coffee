@@ -39,13 +39,12 @@ machine.on "change:state", (state, payload) ->
 			
 	current_state_label.template = state
 
-
 # Graph Logic
 
 
 machine.on "change:state", (state, date) ->
-	if date?
-		print date.toLocaleTimeString() +  ": changed state to " + state
+# 	if date?
+	print date?.toLocaleTimeString() +  ": changed state to " + state
 		
 	switch state
 		when "a"

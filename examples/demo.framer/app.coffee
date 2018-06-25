@@ -3,6 +3,8 @@
 
 { StateMachine } = require 'statemachine'
 
+# Machine
+
 myStateMachine = new StateMachine
 	initial: "default"
 	states:
@@ -13,6 +15,9 @@ myStateMachine = new StateMachine
 			reset: "default"
 		state_b:
 			reset: "default"
+
+
+# Actions
 			
 layer_a.onTap =>
 	myStateMachine.dispatch( "action_a", new Date() )
@@ -22,9 +27,11 @@ layer_b.onTap =>
 
 reset_button.onTap =>
 	myStateMachine.dispatch( "reset", new Date() )
-	
-myStateMachine.on "change:state", (current, payload) ->
 
+
+# Respond to state changes
+	
+myStateMachine.onStateChange (current, payload) ->
 	switch current
 		when "state_a"
 			layer_a.backgroundColor = "#ff0000"

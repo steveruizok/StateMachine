@@ -127,11 +127,8 @@ class exports.StateMachine extends Framer.BaseClass
 
 		state = @_history[@_historyIndex + 1]
 		@_setState(state.name, state.payload, "redo")
-	
-	onChangeCurrent: (fn) =>
-		@on("change:current", fn)
 
-	onChangeState: (fn) =>
+	onStateChange: (fn) =>
 		@on("change:state", fn)
 		
 		

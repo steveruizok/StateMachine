@@ -118,7 +118,7 @@ To see this example in action, [click here](https://framer.cloud/lpCQp).
 
 # Demo: Toggle Button
 
-[Click here](https://framer.cloud/tHxRq) to see a live demo of this example.
+[Click here](https://framer.cloud/rNtID) to see a live demo of this example.
 
 In this example, we build a simple toggle button: it cna be either on or off.
 
@@ -126,7 +126,7 @@ In this example, we build a simple toggle button: it cna be either on or off.
 
 # Demo: Form
 
-[Click here](https://framer.cloud/tHxRq) to see a live demo of this example. 
+[Click here](https://framer.cloud/CXRGL) to see a live demo of this example. 
 
 In this second example, we deal with a more complex set of states and relationships that model an asynchronous submission form.
 
