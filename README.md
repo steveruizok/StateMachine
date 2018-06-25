@@ -126,10 +126,12 @@ In this example, we build a simple toggle button: it cna be either on or off.
 
 # Demo: Form
 
+
 [Click here](https://framer.cloud/CXRGL) to see a live demo of this example. 
 
 In this second example, we deal with a more complex set of states and relationships that model an asynchronous submission form.
 
+![Form Diagram](assets/diagram_form.svg "Form demo")
 ![alt text](assets/form_demo_1.gif "Form demo")
 
 # Documentation

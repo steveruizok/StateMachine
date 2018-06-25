@@ -16,7 +16,7 @@ stateMachine = new StateMachine
 	states:
 		empty:
 			textEnter: "ready"
-			emptySubmit: "warn"
+			submit: "warn"
 		warn:
 			textEnter: "ready"
 		ready:
@@ -27,7 +27,7 @@ stateMachine = new StateMachine
 			success: "success"
 		success:
 			textEnter: "ready"
-			emptySubmit: "warn"
+			submit: "warn"
 		error:
 			textClear: "empty"
 			submit: "fetching"
@@ -189,10 +189,6 @@ input.oninput = (event) ->
 
 layers.button.onTap =>
 	value = input.value
-	
-	if value.length is 0
-		stateMachine.dispatch("emptySubmit")
-		return
 	
 	stateMachine.dispatch("submit", value)
 
