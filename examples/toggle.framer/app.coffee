@@ -24,7 +24,7 @@ toggleButton = new Layer
 	borderRadius: 8
 	shadowColor: "rgba(0,0,0,.5)"
 	animationOptions: 
-		time: .25
+		time: .16
 		
 toggleButton.states =
 	on:
@@ -47,18 +47,13 @@ toggleButton.onTap =>
 
 # Responding to State Changes
 
-toggleMachine.onStateChange (state, payload) ->
-	switch state 
-		when "on"
-			toggleButton.animate("on")
-		when "off"
-			toggleButton.animate("off")
-
+toggleMachine.onStateChange (state) ->
+	toggleButton.animate(state.name)
 
 # Bonus Stuff 
 
 toggleMachine.onStateChange (state, payload) ->
-	currentState.template = state
+	currentState.template = state.name
 	
 currentState = new TextLayer
 	fontSize: 12

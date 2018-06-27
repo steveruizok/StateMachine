@@ -20,8 +20,8 @@ button_b.onTap =>
 
 # [4] Presentation Logic
 
-machine.on "change:state", (state, payload) ->
-	switch state
+machine.on "change:state", (state) ->
+	switch state.name
 		when "a"
 			button_a.animate
 				backgroundColor: "#ff0400"
@@ -42,9 +42,9 @@ machine.on "change:state", (state, payload) ->
 # Graph Logic
 
 
-machine.on "change:state", (state, date) ->
+machine.on "change:state", (state) ->
 # 	if date?
-	print date?.toLocaleTimeString() +  ": changed state to " + state
+	print state.payload?.toLocaleTimeString() +  ": changed state to " + state.name
 		
 	switch state
 		when "a"

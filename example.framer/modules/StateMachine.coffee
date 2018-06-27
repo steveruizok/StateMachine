@@ -46,7 +46,7 @@
 class exports.StateMachine extends Framer.BaseClass
 	constructor: (options = {}) ->
 		_.assign @,
-			_states: []
+			_states: {}
 			_current: undefined
 			_history: []
 			_historyIndex: 0
@@ -58,62 +58,108 @@ class exports.StateMachine extends Framer.BaseClass
 	
 	# Private methods
 	
-	_setCurrent: (state, payload, direction) =>
+	_getCurrent: =>
+		return @_current
+	
+	_setCurrent: (state) =>
 		return unless state?
 		
-		switch direction
+		switch state.direction
 			when "undo"
 				@_historyIndex--
 			when "redo"
 				@_historyIndex++
 			else 
 				if @current?
-					@_addToHistory(@current, payload)
+					@_addToHistory(@current)
 					@_historyIndex++
 		
 		@_current = state
-		@emit("change:current", state.name, payload, @)
-		@emit("change:state", state.name, payload, @)
+
+		@emit("change:current", state, @)
+		@emit("change:state", state, @)
 	
-	_getCurrent: =>
-		return @_getState(@current)
-		
-	_getState: (stateName) =>
-		return _.find(@states, {name: stateName})
+	_getNewState: (stateName) =>
+		if _.includes(stateName, ".")
+			# is a path
+			path = stateName.split(".").join(".states.")
+			newState = _.get(@states, path)
+			return newState
+
+		# work up current state tree
+		path = @_current.path
+
+		handleState = (state) ->
+			if typeof state is "function"
+				return state()
+			else
+				return state
+
+
+		getAtPath = (array) =>
+
+			if array.length is 0
+				unless @states[stateName]
+					throw "Couldn't find that state (#{stateName})."
+					return
+
+				return @states[stateName]
+
+			p = array.join('.states.')
+
+			state = _.get(@states, p + ".states." + stateName)
+			if state
+				return state
+
+			return state ? getAtPath(_.dropRight(array))
+
+		newState = getAtPath(path)
+		return newState
+
 		
 	_setInitialStates: =>
 		if @initial
-			state = _.find(@states, {name: @initial})
+			state = _.get(@states, @initial)
 			if state?
 				@_current = state
 				Utils.delay 0, => @_setCurrent(state)
 				return
+
+		# first = _.keys(@states)
+		@_current = @states[_.keys(@states)[0]]
+		Utils.delay 0, => @_setCurrent(@_current)
 		
-		@_current = @states[0]
-		Utils.delay 0, => @_setCurrent(@states[0])
-		
-	_addToHistory: (stateName, payload) =>
+	_addToHistory: (state, payload) =>
 		@_history = @_history.slice(0, @_historyIndex)
-		@_history.push({name: stateName, payload: payload})
+		@_history.push(state)
 	
 	_setState: (stateName, payload, direction) =>
-		state = @_getState(stateName)
+		state = @_getNewState(stateName)
 		
 		unless state?
 			return;
 		
-		this._setCurrent(state, payload, direction)
+		_.assign state,
+			payload: payload
+			direction: direction
+
+		this._setCurrent(state)
 	
 	
 	# Public methods
+
+	isInState: (stateName) =>
+		return _.includes(@current?.path, stateName)
 	
 	dispatch: (actionName, payload) =>
 		current = @_getCurrent()
+
 		newStateName = current.actions[actionName]
+		if typeof newStateName is "function" then newStateName = newStateName()
 		
 		if _.isUndefined(newStateName)
 			return
-		
+
 		@_setState(newStateName, payload)
 		
 	undo: =>
@@ -141,14 +187,14 @@ class exports.StateMachine extends Framer.BaseClass
 		get: -> return @_historyIndex
 		
 	@define "state",
-		get: -> return @current
+		get: -> return @current.name
 		set: (stateName) ->
 			return unless stateName?
 			
 			@_setState(stateName)
 		
 	@define "current",
-		get: -> return (@_current ? @initial)?.name ? undefined
+		get: -> return @_current
 		
 	@define "initial",
 		get: -> return @_initial
@@ -157,12 +203,40 @@ class exports.StateMachine extends Framer.BaseClass
 	
 	@define "states",
 		get: -> @_states
-		set: (states) ->
-			newStates = _.map(states, (value, key) =>
-				return {name: key, actions: value}
-				)
+		set: (newStates) ->
+
+			getStates = (statesObject, target) =>
+				target._states = {}
+
+				markupState = (value, key, obj) =>
+					state =
+						name: key
+						path: []
+						states: {}
+						actions: {}
+					
+					if obj.path?
+						state.path = _.concat(obj.path, key)
+					else
+						state.path = [key]
+							
+					_.forEach value, (v, k) =>
+						switch typeof v
+							when "string"
+								state.actions[k] = v
+							when "function"
+								state.actions[k] = v
+							when "object"
+								state.states[k] = markupState(v, k, state)
+					
+					return state
+		
+				_.forEach statesObject, (v, k) -> 
+					target._states[k] = markupState(v, k, statesObject)
+					
+				return target
 			
-			@_states = newStates
-			
+			getStates(newStates, @)
+
 			# set initial state (delayed for listeners)
 			@_setInitialStates()

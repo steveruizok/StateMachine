@@ -28,20 +28,31 @@ layer_b.onTap =>
 reset_button.onTap =>
 	myStateMachine.dispatch( "reset", new Date() )
 
+# Layer states (presentational)
+
+for layer in [layer_a, layer_b]
+	layer.states =
+		default:
+			backgroundColor: "#cccccc"
+		active:
+			backgroundColor: "#ff0000"
+		animationOptions:
+			time: .16
+			
 
 # Respond to state changes
 	
-myStateMachine.onStateChange (current, payload) ->
-	switch current
+myStateMachine.onStateChange (state) ->
+	switch state.name
 		when "state_a"
-			layer_a.backgroundColor = "#ff0000"
-			layer_b.backgroundColor = "#cccccc"
+			layer_a.animate("active")
+			layer_b.animate("default")
 		when "state_b"
-			layer_a.backgroundColor = "#cccccc"
-			layer_b.backgroundColor = "#ff0000"
+			layer_a.animate("default")
+			layer_b.animate("active")
 		when "default"
-			layer_a.backgroundColor = "#cccccc"
-			layer_b.backgroundColor = "#cccccc"
+			layer_a.animate("default")
+			layer_b.animate("default")
 			
-	if payload instanceof Date
-		print payload.toLocaleString() +  ": changed state to " + current
+	if state.payload instanceof Date
+		print state.payload.toLocaleString() +  ": changed state to " + state.name

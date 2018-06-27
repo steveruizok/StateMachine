@@ -132,7 +132,7 @@ layers.errorText.stateSwitch("warn")
 
 # Responding to State Changes
 
-stateMachine.onStateChange (state, payload) ->
+stateMachine.onStateChange (state) ->
 	
 	# default properties
 	layers.buttonText.text = "Submit"
@@ -142,7 +142,7 @@ stateMachine.onStateChange (state, payload) ->
 	input.readOnly = false
 	
 	# overrides (depending on state)
-	switch state
+	switch state.name
 		when "empty"
 			layers.button.animate("disabled")
 		when "warn"
@@ -157,7 +157,7 @@ stateMachine.onStateChange (state, payload) ->
 		when "success"
 			layers.button.animate("disabled")
 			layers.errorText.stateSwitch("success")
-			layers.errorText.text = "Thanks #{payload}! We got your name ok."
+			layers.errorText.text = "Thanks #{state.payload}! We got your name ok."
 			input.value = ""
 		when "error"
 			layers.errorText.stateSwitch("error")
@@ -167,9 +167,9 @@ stateMachine.onStateChange (state, payload) ->
 		else
 			null
 			
-	if state is "fetching"
+	if state.name is "fetching"
 		if Math.random() > .5
-			Utils.delay 1, => stateMachine.dispatch("success", payload)
+			Utils.delay 1, => stateMachine.dispatch("success", state.payload)
 		else
 			Utils.delay 1, => stateMachine.dispatch("error")
 
@@ -197,8 +197,8 @@ layers.button.onTap =>
 
 # Bonus Stuff
 
-stateMachine.onStateChange (state, payload) ->
-	layers.currentState.template = state
+stateMachine.onStateChange (state) ->
+	layers.currentState.template = state.name
 
 layers.currentState = new TextLayer
 	parent: layers.form

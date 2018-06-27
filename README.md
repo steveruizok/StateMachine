@@ -28,7 +28,7 @@ A Framer module for designing with finite state machines. Easily define a compon
 
 ## Manual
 
-First download the **statemachine.coffee** file and drag it into your Framer project's `modules` folder. 
+First download the **statemachine.coffee** file and drag it into your Framer project's `modules` folder.
 
 Then, at the top of your Framer project's code, type `{ StateMachine } = require "statemachine"`.
 
@@ -57,7 +57,6 @@ myStateMachine = new StateMachine
 			reset: "default"
 ```
 
-
 ### Actions
 
 Each of a StateMachine's states may have one or more "response"s. These pair the name of an action and the name of a state. In the example above, `state_a`'s first response, `{action_b: "state_b"}` pairs the action `action_b` and to the state name `"state_b"`.
@@ -83,18 +82,18 @@ In this example, tapping on the layer `layer_a` dispatches the action `action_a`
 
 When the machine recieves an action, it checks to see if its current state has an response for that action. If it does not have a response for the action, the machine will ignore the action -- but if it does have a response, the machine will change its state to the state indicated in that response.
 
-If our example machine was in `default` and we tapped on `layer_a`, the machine would respond to the dispatched action, `action_a`, by changing its state to `state_a`. If we then tapped `layer_a` again, the machine would ignore the action, as its now-current state, `state_a`, has no response for `action_a`. 
+If our example machine was in `default` and we tapped on `layer_a`, the machine would respond to the dispatched action, `action_a`, by changing its state to `state_a`. If we then tapped `layer_a` again, the machine would ignore the action, as its now-current state, `state_a`, has no response for `action_a`.
 
 Likewise, our machine has no path between `state_a` and `state_b`: the machine would ignore all `action_a` and `action_b` dispatches while in either of these states. In order to move from one to the other, the machine would have to first return to the `default` state (using a `reset` action).
 
 ### Listening for State Changes
 
-When a state machine changes its state, it emits an event, `"change:state"` that can be called with two arguments: 1) the name of its new current state, and 2) the payload sent with the preceding action. (This event has an alias, `machine.onStateChange`.) You can use this event, along with a `switch` statement, to decide how to represent the machine's current state to your user.
+When a state machine changes its state, it emits an event, `"change:state"` that can be called with two arguments: 1) its new current state, and 2) the payload sent with the preceding action. (This event has an alias, `machine.onStateChange`.) You can use this event, along with a `switch` statement, to decide how to represent the machine's current state to your user.
 
 ```coffeescript
-myStateMachine.onStateChange, (current, payload) ->
+myStateMachine.onStateChange, (state, payload) ->
 
-	switch current
+	switch state.name
 		when "state_a"
 			layer_a.backgroundColor = "#ff0000"
 			layer_b.backgroundColor = "#cccccc"
@@ -109,12 +108,80 @@ myStateMachine.onStateChange, (current, payload) ->
 You can also use the payload send with the state change event to make more complex changes in your project.
 
 ```coffeescript
-myStateMachine.onStateChange (current, payload) ->
+myStateMachine.onStateChange (state, payload) ->
 	if payload instanceof Date
 		print payload.toLocaleString() +  ": changed state to " + current
 ```
 
 To see this example in action, [click here](https://framer.cloud/lpCQp).
+
+## Advanced
+
+### Responding with functions
+
+What if there's some logic in the machine's response to a given action? Instead of defining an action's value as the name of a state, you may also use a function that returns the name of a state.
+
+```coffeescript
+coin.machine = new StateMachine
+	states:
+		heads:
+			turn_over: "tails"
+			flip: -> if Math.random() >= 0.5 then "heads" else "tails"
+		tails:
+			turn_over: "heads"
+			flip: -> if Math.random() >= 0.5 then "heads" else "tails"
+```
+
+### Nesting states
+
+What about when a state has its own states? When defining your machines's states, you may include sub-states by placing one state object inside of another. You can include as many levels of nestedness as you like.
+
+```coffeescript
+button.machine = new StateMachine
+	initial: "off"
+	states:
+		off:
+			mouseEnter: "hovered"
+			hovered:
+				mouseLeave: "off"
+				press: "pressed"
+				pressed:
+					release: "on.hovered"
+		on:
+			mouseEnter: "hovered"
+			hovered:
+				mouseLeave: "on"
+				press: "pressed"
+				pressed:
+					release: "off.hovered"
+```
+
+Notice that the `release` action for the `off.hovered.pressed` state points to `on.hovered`, a direct route to a particular unique state. We'll called this a "path". When given a state name, the machine will work its way back up the state tree, checking at each level whether a state with that name exists, and terminating at the root of its `states` object. However, you may link directly to a given state by using a path (a string that will always include at least one `.`)
+
+Presenting components that own nested states usually involves checking against the machine's `state.path`, rather than `state.name`, as you may wish to represent the parent state rather than the newest child state. Because `state.path` comes is an array, you can check against different state levels using bracket notation. In our example, `state.path[0]` will always be either `"on"` or `"off"`, while `state.path[1]` will be either `hovered` or `undefined`. To check whether the machine's path includes a given state name (at any level), use the `machine.isInState()` method.
+
+```coffeescript
+button.machine.onStateChange (state) ->
+	switch state.path[0]
+		when "on"
+			button.animate
+				shadowY: 1
+				brightness: 75
+		when "off"
+			button.animate
+				shadowY: 4
+				brightness: 100
+
+	if state.name is "pressed"
+		button.animate
+			shadowY: 0
+			brightness: 50
+
+	if state.name is "hovered"
+		button.opacity = .9
+	else
+		button.opacity = 1
+```
 
 # Demo: Toggle Button
 
@@ -126,8 +193,7 @@ In this example, we build a simple toggle button: it cna be either on or off.
 
 # Demo: Form
 
-
-[Click here](https://framer.cloud/CXRGL) to see a live demo of this example. 
+[Click here](https://framer.cloud/CXRGL) to see a live demo of this example.
 
 In this second example, we deal with a more complex set of states and relationships that model an asynchronous submission form.
 
@@ -148,12 +214,12 @@ In this second example, we deal with a more complex set of states and relationsh
 
 ## Methods
 
-| Name                  | Argument Types       | Description                                                                                                    |
-| --------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `dispatch(action, paylaod)`   | `action : string`, `payload: any` | Dispatches an action to the machine.                                                                                 |
-| `onChangeState(fn)`   | `fn: EventHandler`  | Sets an event listener that fires when the machine's state changes. Alias for `machine.on("change:state")`. |                                                               |
-| `undo()`              | n/a                  | Moves the StateMachine to its previous state, if one exists.                                                   |
-| `redo()`              | n/a                  | Moves the StateMachine to its next state, if one exists.                                                       |
+| Name                        | Argument Types                    | Description                                                                                                 |
+| --------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `dispatch(action, paylaod)` | `action : string`, `payload: any` | Dispatches an action to the machine.                                                                        |
+| `onChangeState(fn)`         | `fn: EventHandler`                | Sets an event listener that fires when the machine's state changes. Alias for `machine.on("change:state")`. |  |
+| `undo()`                    | n/a                               | Moves the StateMachine to its previous state, if one exists.                                                |
+| `redo()`                    | n/a                               | Moves the StateMachine to its next state, if one exists.                                                    |
 
 # Contact
 

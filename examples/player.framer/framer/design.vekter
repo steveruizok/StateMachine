@@ -1518,6 +1518,98 @@
                     "width" : 12,
                     "x" : 83,
                     "y" : 121
+                  },
+                  {
+                    "__class" : "PathNode",
+                    "aspectRatioLocked" : false,
+                    "boxShadows" : [
+
+                    ],
+                    "exportOptions" : [
+
+                    ],
+                    "fillColor" : "hsl(0, 0%, 0%)",
+                    "fillEnabled" : true,
+                    "fillGradient" : {
+                      "__class" : "LinearGradient",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "end" : "rgba(0,0,0,0)",
+                      "start" : "black"
+                    },
+                    "fillImage" : null,
+                    "fillImagePixelHeight" : null,
+                    "fillImagePixelWidth" : null,
+                    "fillImageResize" : "fill",
+                    "fillType" : "color",
+                    "height" : 12,
+                    "id" : "aWYQxlHh3",
+                    "lineCap" : "butt",
+                    "lineJoin" : "miter",
+                    "locked" : false,
+                    "name" : null,
+                    "opacity" : 1,
+                    "parentid" : "AlzGshuRG",
+                    "pathClosed" : true,
+                    "pathSegments" : [
+                      {
+                        "__class" : "PathSegment",
+                        "handleInX" : -3.3137084989847665,
+                        "handleInY" : 0,
+                        "handleMirroring" : "symmetric",
+                        "handleOutX" : 3.3137084989847665,
+                        "handleOutY" : 0,
+                        "radius" : 0,
+                        "x" : 6,
+                        "y" : 0
+                      },
+                      {
+                        "__class" : "PathSegment",
+                        "handleInX" : 0,
+                        "handleInY" : -3.3137084989847665,
+                        "handleMirroring" : "symmetric",
+                        "handleOutX" : 0,
+                        "handleOutY" : 3.3137084989847665,
+                        "radius" : 0,
+                        "x" : 12,
+                        "y" : 6
+                      },
+                      {
+                        "__class" : "PathSegment",
+                        "handleInX" : 3.3137084989847665,
+                        "handleInY" : 0,
+                        "handleMirroring" : "symmetric",
+                        "handleOutX" : -3.3137084989847665,
+                        "handleOutY" : 0,
+                        "radius" : 0,
+                        "x" : 6,
+                        "y" : 12
+                      },
+                      {
+                        "__class" : "PathSegment",
+                        "handleInX" : 0,
+                        "handleInY" : 3.3137084989847665,
+                        "handleMirroring" : "symmetric",
+                        "handleOutX" : 0,
+                        "handleOutY" : -3.3137084989847665,
+                        "radius" : 0,
+                        "x" : 0,
+                        "y" : 6
+                      }
+                    ],
+                    "rotation" : 0,
+                    "strokeAlignment" : "center",
+                    "strokeColor" : "#0AF",
+                    "strokeDashArray" : "0",
+                    "strokeDashOffset" : 0,
+                    "strokeEnabled" : 0,
+                    "strokeMiterLimit" : 4,
+                    "strokeWidth" : 1,
+                    "targetName" : null,
+                    "visible" : true,
+                    "width" : 12,
+                    "x" : 83,
+                    "y" : 46
                   }
                 ],
                 "clip" : false,
@@ -1783,8 +1875,100 @@
                     "targetName" : null,
                     "visible" : true,
                     "width" : 12,
-                    "x" : 83,
+                    "x" : 82.999999999999943,
                     "y" : 121
+                  },
+                  {
+                    "__class" : "PathNode",
+                    "aspectRatioLocked" : false,
+                    "boxShadows" : [
+
+                    ],
+                    "exportOptions" : [
+
+                    ],
+                    "fillColor" : "hsl(0, 0%, 0%)",
+                    "fillEnabled" : true,
+                    "fillGradient" : {
+                      "__class" : "LinearGradient",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "end" : "rgba(0,0,0,0)",
+                      "start" : "black"
+                    },
+                    "fillImage" : null,
+                    "fillImagePixelHeight" : null,
+                    "fillImagePixelWidth" : null,
+                    "fillImageResize" : "fill",
+                    "fillType" : "color",
+                    "height" : 12,
+                    "id" : "B8wbHOrRw",
+                    "lineCap" : "butt",
+                    "lineJoin" : "miter",
+                    "locked" : false,
+                    "name" : null,
+                    "opacity" : 1,
+                    "parentid" : "b2OVkmCrP",
+                    "pathClosed" : true,
+                    "pathSegments" : [
+                      {
+                        "__class" : "PathSegment",
+                        "handleInX" : -3.3137084989847665,
+                        "handleInY" : 0,
+                        "handleMirroring" : "symmetric",
+                        "handleOutX" : 3.3137084989847665,
+                        "handleOutY" : 0,
+                        "radius" : 0,
+                        "x" : 6,
+                        "y" : 0
+                      },
+                      {
+                        "__class" : "PathSegment",
+                        "handleInX" : 0,
+                        "handleInY" : -3.3137084989847665,
+                        "handleMirroring" : "symmetric",
+                        "handleOutX" : 0,
+                        "handleOutY" : 3.3137084989847665,
+                        "radius" : 0,
+                        "x" : 12,
+                        "y" : 6
+                      },
+                      {
+                        "__class" : "PathSegment",
+                        "handleInX" : 3.3137084989847665,
+                        "handleInY" : 0,
+                        "handleMirroring" : "symmetric",
+                        "handleOutX" : -3.3137084989847665,
+                        "handleOutY" : 0,
+                        "radius" : 0,
+                        "x" : 6,
+                        "y" : 12
+                      },
+                      {
+                        "__class" : "PathSegment",
+                        "handleInX" : 0,
+                        "handleInY" : 3.3137084989847665,
+                        "handleMirroring" : "symmetric",
+                        "handleOutX" : 0,
+                        "handleOutY" : -3.3137084989847665,
+                        "radius" : 0,
+                        "x" : 0,
+                        "y" : 6
+                      }
+                    ],
+                    "rotation" : 0,
+                    "strokeAlignment" : "center",
+                    "strokeColor" : "#0AF",
+                    "strokeDashArray" : "0",
+                    "strokeDashOffset" : 0,
+                    "strokeEnabled" : 0,
+                    "strokeMiterLimit" : 4,
+                    "strokeWidth" : 1,
+                    "targetName" : null,
+                    "visible" : true,
+                    "width" : 12,
+                    "x" : 83,
+                    "y" : 46
                   }
                 ],
                 "clip" : false,
@@ -2072,9 +2256,118 @@
         "top" : 330,
         "visible" : true,
         "width" : 109,
-        "widthFactor" : null,
-        "x" : 230,
-        "y" : 340
+        "widthFactor" : null
+      },
+      {
+        "__class" : "TextNode",
+        "autoSize" : true,
+        "blendingEnabled" : 0,
+        "blendingMode" : "normal",
+        "blur" : 12,
+        "blurEnabled" : 0,
+        "blurType" : "layer",
+        "bottom" : null,
+        "brightness" : 100,
+        "brightnessEnabled" : 0,
+        "centerAnchorX" : 0.49922118380062308,
+        "centerAnchorY" : 1.0017921146953406,
+        "constraintsLocked" : false,
+        "contrast" : 100,
+        "contrastEnabled" : 0,
+        "editable" : false,
+        "exportOptions" : [
+
+        ],
+        "grayscale" : 0,
+        "grayScaleEnabled" : 0,
+        "height" : 19,
+        "heightFactor" : null,
+        "hueRotate" : 0,
+        "hueRotateEnabled" : 0,
+        "id" : "KJHhUlXRS",
+        "invert" : 0,
+        "invertEnabled" : 0,
+        "left" : 268,
+        "locked" : false,
+        "name" : "path_label",
+        "opacity" : 1,
+        "parentid" : "CEFBE4R_u",
+        "right" : null,
+        "rotation" : 0,
+        "saturate" : 100,
+        "saturateEnabled" : 0,
+        "sepia" : 0,
+        "sepiaEnabled" : 0,
+        "shadows" : [
+
+        ],
+        "styledText" : {
+          "__class" : "StyledTextDraft",
+          "blocks" : [
+            {
+              "data" : {
+                "emptyStyle" : [
+                  "FONT:HelveticaNeue",
+                  "COLOR:rgb(0, 0, 0)",
+                  "SIZE:16",
+                  "LETTERSPACING:0",
+                  "LINEHEIGHT:1.2"
+                ]
+              },
+              "depth" : 0,
+              "entityRanges" : [
+
+              ],
+              "inlineStyleRanges" : [
+                {
+                  "length" : 15,
+                  "offset" : 0,
+                  "style" : "FONT:HelveticaNeue"
+                },
+                {
+                  "length" : 15,
+                  "offset" : 0,
+                  "style" : "COLOR:rgb(0, 0, 0)"
+                },
+                {
+                  "length" : 15,
+                  "offset" : 0,
+                  "style" : "SIZE:16"
+                },
+                {
+                  "length" : 15,
+                  "offset" : 0,
+                  "style" : "LETTERSPACING:0"
+                },
+                {
+                  "length" : 15,
+                  "offset" : 0,
+                  "style" : "LINEHEIGHT:1.2"
+                }
+              ],
+              "key" : "54o89",
+              "text" : "Path: {current}",
+              "type" : "unstyled"
+            }
+          ],
+          "cached" : {
+            "html" : "<span data-offset-key=\"54o89-0-0\" style=\"tab-size:4;font-weight:400;font-family:&quot;HelveticaNeue&quot;, &quot;Helvetica Neue&quot;, sans-serif;-webkit-text-fill-color:rgb(0, 0, 0);font-size:16px;letter-spacing:0px;line-height:1.2\"><span data-text=\"true\">Path: {current}<\/span><\/span>",
+            "os" : "10_13",
+            "size" : {
+              "height" : 19,
+              "width" : 104
+            },
+            "width" : 0
+          },
+          "entityMap" : {
+
+          }
+        },
+        "targetName" : "path_label",
+        "top" : 366,
+        "visible" : true,
+        "width" : 104,
+        "widthFactor" : null
       }
     ],
     "id" : "CEFBE4R_u",

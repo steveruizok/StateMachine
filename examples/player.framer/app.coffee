@@ -1,8 +1,12 @@
+# StateMachine Demo: Tape Player
+# @steveruizok
+
 { StateMachine } = require 'statemachine'
 
 Screen.backgroundColor = "#efefef"
 player.x = Align.center()
 state_label.x = Align.center()
+path_label.x = Align.center()
 
 
 # Animations (playing, tracking)
@@ -52,23 +56,32 @@ player.machine = new StateMachine
 		playing:
 			pause: "paused"
 			stop: "stopped"
-			fast_rewind: "play_rewinding"
-			fast_forward: "play_forwarding"
+			fast_rewind: "fast_rewinding"
+			fast_forward: "fast_forwarding"
 			paused:
 				stop: "stopped"
 				resume: "playing"
-			play_rewinding:
+			fast_rewinding:
 				stop: "stopped"
+				pause: "paused"
+				paused:
+					resume: "fast_rewinding"
 				track_end: "playing"
-			play_forwarding: 
+			fast_forwarding: 
 				stop: "stopped"
 				track_end: "playing"
 		fast_rewinding:
 			stop: "stopped"
 			play: "playing"
+			pause: "paused"
+			paused:
+				resume: "fast_rewinding"
 		fast_forwarding:
 			stop: "stopped"
 			play: "playing"
+			pause: "paused"
+			paused:
+				resume: "fast_forwarding"
 		stopped:
 			play: "playing"
 			stop: "stopped"
@@ -76,10 +89,11 @@ player.machine = new StateMachine
 			fast_forward: "fast_forwarding"
 
 player.machine.onStateChange (state) ->
-	state_label.template = state
+	state_label.template = state.name
+	path_label.template = state.path.join('.')
 	resets = []
 	
-	switch state
+	switch state.name
 		when "playing"
 			showPlaying(true)
 			resets = [stopp, fast_rewind, fast_forward]
@@ -106,7 +120,8 @@ player.machine.onStateChange (state) ->
 
 # Buttons (Presentation)
 
-[pause, play, fast_rewind, fast_forward, stopp].forEach (button) ->
+[pause, play, fast_rewind, 
+fast_forward, stopp].forEach (button) ->
 	
 	button.states =
 		off:
@@ -128,9 +143,9 @@ player.machine.onStateChange (state) ->
 	button.onTapEnd -> 
 		button.machine.dispatch("release")
 
-# Stop / Pause (Machine Logic)
+# Stopp
 
-[stopp, pause].forEach (button) ->
+[stopp].forEach (button) ->
 
 	button.machine = new StateMachine
 		initial: "off"
@@ -141,24 +156,38 @@ player.machine.onStateChange (state) ->
 					release: "off"
 	
 	button.machine.onStateChange (state, payload) ->
-		button.animate(state)
+		button.animate(state.name)
+	
+	button.machine.onStateChange (state) ->
+		switch state.name
+			when "pressed"
+				player.machine.dispatch("stop")
 
+# Pause
 
-stopp.machine.onStateChange (state) ->
-	switch state
-		when "pressed"
-			player.machine.dispatch("stop")
-			
-pause.machine.onStateChange (state) ->
-	switch state
-		when "pressed"
-			player.machine.dispatch("pause")
-		when "off"
-			player.machine.dispatch("resume")
-			
-# Rewind, Forward (Machine Logic)
+[pause].forEach (button) ->
 
-[fast_rewind, fast_forward].forEach (button) ->
+	button.machine = new StateMachine
+		initial: "off"
+		states:
+			off:
+				press: "pressed"
+				pressed:
+					release: "off"
+	
+	button.machine.onStateChange (state, payload) ->
+		button.animate(state.name)
+	
+	button.machine.onStateChange (state) ->
+		switch state.name
+			when "pressed"
+				player.machine.dispatch("pause")
+			when "off"
+				player.machine.dispatch("resume")
+
+# Fast Rewind
+
+[fast_rewind].forEach (button) ->
 	button.machine = new StateMachine
 		initial: "off"
 		states:
@@ -166,33 +195,62 @@ pause.machine.onStateChange (state) ->
 				press: "pressed"
 				pressed:
 					release: ->
-						if player.machine.state is "fast_forwarding" or
-						player.machine.state is "fast_rewinding"
-							return "on"
-						else
+						if player.machine.isInState("playing")
 							return "off"
+						else if player.machine.isInState("fast_forwarding")
+							return "off"
+						else
+							return "on"
 			on:
 				reset: "off"
+				press: "pressed"
+				pressed:
+					release: "on"
 		
 	button.machine.onStateChange (state, payload) ->
-		button.animate(state)
+		button.animate(state.name)
+
+	button.machine.onStateChange (state) ->
+		switch state.name
+			when "pressed"
+				player.machine.dispatch("fast_rewind")
+			when "off"
+				player.machine.dispatch("track_end")
 
 
-fast_rewind.machine.onStateChange (state) ->
-	switch state
-		when "pressed"
-			player.machine.dispatch("fast_rewind")
-		when "off"
-			player.machine.dispatch("track_end")
+# Fast Forward
 
-fast_forward.machine.onStateChange (state) ->
-	switch state
-		when "pressed"
-			player.machine.dispatch("fast_forward")
-		when "off"
-			player.machine.dispatch("track_end")
+[fast_forward].forEach (button) ->
+	button.machine = new StateMachine
+		initial: "off"
+		states:
+			off:
+				press: "pressed"
+				pressed:
+					release: ->
+						if player.machine.isInState("playing")
+							return "off"
+						else if player.machine.isInState("fast_rewinding")
+							return "off"
+						else
+							return "on"
+			on:
+				reset: "off"
+				press: "pressed"
+				pressed:
+					release: "on"
+		
+	button.machine.onStateChange (state, payload) ->
+		button.animate(state.name)
 
-# Play (Machine Logic)
+	button.machine.onStateChange (state) ->
+		switch state.name
+			when "pressed"
+				player.machine.dispatch("fast_forward")
+			when "off"
+				player.machine.dispatch("track_end")
+
+# Play 
 
 [play].forEach (button) ->
 	button.machine = new StateMachine
@@ -200,16 +258,16 @@ fast_forward.machine.onStateChange (state) ->
 		states:
 			off:
 				press: "pressed"
-				pressed:
-					release: "on"
 			on:
 				reset: "off"
-				
+				press: "pressed"
+			pressed:
+				release: "on"
+			
 	button.machine.onStateChange (state, payload) ->
-		button.animate(state)
-		switch state
+		button.animate(state.name)
+		switch state.name
 			when "pressed"
 				player.machine.dispatch("play")
 			when "off"
 				player.machine.dispatch("stop")
-			

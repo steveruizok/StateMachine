@@ -61,26 +61,33 @@ class exports.StateMachine extends Framer.BaseClass
 	_getCurrent: =>
 		return @_current
 	
-	_setCurrent: (state, payload, direction) =>
+	_setCurrent: (state) =>
 		return unless state?
 		
-		switch direction
+		switch state.direction
 			when "undo"
 				@_historyIndex--
 			when "redo"
 				@_historyIndex++
 			else 
 				if @current?
-					@_addToHistory(@current, payload)
+					@_addToHistory(@current)
 					@_historyIndex++
 		
 		@_current = state
 
-		@emit("change:current", state.name, payload, @)
-		@emit("change:state", state.name, payload, @)
+		@emit("change:current", state, @)
+		@emit("change:state", state, @)
 	
 	_getNewState: (stateName) =>
-		path = @_current.path.split('.')
+		if _.includes(stateName, ".")
+			# is a path
+			path = stateName.split(".").join(".states.")
+			newState = _.get(@states, path)
+			return newState
+
+		# work up current state tree
+		path = @_current.path
 
 		handleState = (state) ->
 			if typeof state is "function"
@@ -90,20 +97,21 @@ class exports.StateMachine extends Framer.BaseClass
 
 
 		getAtPath = (array) =>
+
 			if array.length is 0
 				unless @states[stateName]
-					throw "Couldn't find that state."
+					throw "Couldn't find that state (#{stateName})."
 					return
 
 				return @states[stateName]
 
-			path = array.join('.')
-			state = _.get(@states, path)
+			p = array.join('.states.')
 
-			if state?.states[stateName]
-				return state.states[stateName]
+			state = _.get(@states, p + ".states." + stateName)
+			if state
+				return state
 
-			getAtPath(_.dropRight(array))
+			return state ? getAtPath(_.dropRight(array))
 
 		newState = getAtPath(path)
 		return newState
@@ -121,9 +129,9 @@ class exports.StateMachine extends Framer.BaseClass
 		@_current = @states[_.keys(@states)[0]]
 		Utils.delay 0, => @_setCurrent(@_current)
 		
-	_addToHistory: (stateName, payload) =>
+	_addToHistory: (state, payload) =>
 		@_history = @_history.slice(0, @_historyIndex)
-		@_history.push({name: stateName, payload: payload})
+		@_history.push(state)
 	
 	_setState: (stateName, payload, direction) =>
 		state = @_getNewState(stateName)
@@ -131,10 +139,17 @@ class exports.StateMachine extends Framer.BaseClass
 		unless state?
 			return;
 		
-		this._setCurrent(state, payload, direction)
+		_.assign state,
+			payload: payload
+			direction: direction
+
+		this._setCurrent(state)
 	
 	
 	# Public methods
+
+	isInState: (stateName) =>
+		return _.includes(@current?.path, stateName)
 	
 	dispatch: (actionName, payload) =>
 		current = @_getCurrent()
@@ -196,14 +211,14 @@ class exports.StateMachine extends Framer.BaseClass
 				markupState = (value, key, obj) =>
 					state =
 						name: key
-						path: undefined
+						path: []
 						states: {}
 						actions: {}
 					
-					if obj.path 
-						state.path = obj.path + "." + key
+					if obj.path?
+						state.path = _.concat(obj.path, key)
 					else
-						state.path = key
+						state.path = [key]
 							
 					_.forEach value, (v, k) =>
 						switch typeof v

@@ -172,9 +172,7 @@
                 "top" : null,
                 "visible" : true,
                 "width" : 61,
-                "widthFactor" : null,
-                "x" : 35,
-                "y" : 23
+                "widthFactor" : null
               }
             ],
             "clip" : false,
@@ -379,9 +377,7 @@
                 "top" : null,
                 "visible" : true,
                 "width" : 14,
-                "widthFactor" : null,
-                "x" : 35,
-                "y" : 23
+                "widthFactor" : null
               }
             ],
             "clip" : false,
@@ -586,9 +582,7 @@
                 "top" : null,
                 "visible" : true,
                 "width" : 14,
-                "widthFactor" : null,
-                "x" : 35,
-                "y" : 23
+                "widthFactor" : null
               }
             ],
             "clip" : false,
