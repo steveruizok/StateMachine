@@ -13,8 +13,8 @@ A Framer module for designing with finite state machines. Easily define a compon
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Demo: Toggle Button](#demo-toggle-button)
-- [Demo: Form](#demo-form)
+- [Advanced](#advanced)
+- [Demos](#demos)
 - [Documentation](#documentation)
 
 # Installation
@@ -183,22 +183,30 @@ button.machine.onStateChange (state) ->
 		button.opacity = 1
 ```
 
-# Demo: Toggle Button
+[Click here](https://framer.cloud/EJyMs) to see a live example of this example.
 
-[Click here](https://framer.cloud/rNtID) to see a live demo of this example.
+# Demos
 
-In this example, we build a simple toggle button: it cna be either on or off.
+### Toggle Button
 
 ![alt text](assets/toggle_demo.gif "Toggle demo")
 
-# Demo: Form
+[Click here](https://framer.cloud/rNtID) to view and download this example on Framer Cloud.
 
-[Click here](https://framer.cloud/CXRGL) to see a live demo of this example.
-
-In this second example, we deal with a more complex set of states and relationships that model an asynchronous submission form.
+### Form
 
 ![Form Diagram](assets/diagram_form.svg "Form demo")
 ![alt text](assets/form_demo_1.gif "Form demo")
+
+[Click here](https://framer.cloud/CXRGL) to view and download this example on Framer Cloud.
+
+### Toggle Button with Hover States
+
+[Click here](https://framer.cloud/EJyMs) to view and download this example on Framer Cloud.
+
+### Tape player
+
+[Click here](https://framer.cloud/EJyMs) to view and download this example on Framer Cloud.
 
 # Documentation
 

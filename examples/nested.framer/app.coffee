@@ -4,8 +4,8 @@
 { StateMachine } = require 'statemachine'
 Screen.backgroundColor = "#efefef"
 
-state_label.x = 128
-path_label.x = 128
+state_label.x = Align.center()
+path_label.x = Align.center()
 
 button.machine = new StateMachine
 	initial: "off"

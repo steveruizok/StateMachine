@@ -213,7 +213,7 @@
           },
           {
             "__class" : "TextNode",
-            "autoSize" : true,
+            "autoSize" : false,
             "blendingEnabled" : 0,
             "blendingMode" : "normal",
             "blur" : 12,
@@ -240,12 +240,12 @@
             "id" : "kv5e3Q7w0",
             "invert" : 0,
             "invertEnabled" : 0,
-            "left" : null,
+            "left" : 0,
             "locked" : false,
             "name" : "state_label",
             "opacity" : 1,
             "parentid" : "g8p_did6x",
-            "right" : null,
+            "right" : 0,
             "rotation" : 0,
             "saturate" : 100,
             "saturateEnabled" : 0,
@@ -265,7 +265,7 @@
                       "SIZE:16",
                       "LETTERSPACING:0",
                       "LINEHEIGHT:1.2",
-                      "ALIGN:left"
+                      "ALIGN:center"
                     ]
                   },
                   "depth" : 0,
@@ -301,7 +301,7 @@
                     {
                       "length" : 16,
                       "offset" : 0,
-                      "style" : "ALIGN:left"
+                      "style" : "ALIGN:center"
                     }
                   ],
                   "key" : "54o89",
@@ -314,9 +314,9 @@
                 "os" : "10_13",
                 "size" : {
                   "height" : 19,
-                  "width" : 109
+                  "width" : 376
                 },
-                "width" : 0
+                "width" : 375
               },
               "entityMap" : {
 
@@ -325,14 +325,12 @@
             "targetName" : "state_label",
             "top" : 252,
             "visible" : true,
-            "width" : 109,
-            "widthFactor" : null,
-            "x" : 230,
-            "y" : 340
+            "width" : 375,
+            "widthFactor" : null
           },
           {
             "__class" : "TextNode",
-            "autoSize" : true,
+            "autoSize" : false,
             "blendingEnabled" : 0,
             "blendingMode" : "normal",
             "blur" : 12,
@@ -341,7 +339,7 @@
             "bottom" : null,
             "brightness" : 100,
             "brightnessEnabled" : 0,
-            "centerAnchorX" : 0.49333333333333335,
+            "centerAnchorX" : 0.5,
             "centerAnchorY" : 0.45802098950524739,
             "constraintsLocked" : false,
             "contrast" : 100,
@@ -359,12 +357,12 @@
             "id" : "QAElPi_OR",
             "invert" : 0,
             "invertEnabled" : 0,
-            "left" : 133,
+            "left" : 0,
             "locked" : false,
             "name" : "path_label",
             "opacity" : 1,
             "parentid" : "g8p_did6x",
-            "right" : null,
+            "right" : 0,
             "rotation" : 0,
             "saturate" : 100,
             "saturateEnabled" : 0,
@@ -384,7 +382,7 @@
                       "SIZE:16",
                       "LETTERSPACING:0",
                       "LINEHEIGHT:1.2",
-                      "ALIGN:left"
+                      "ALIGN:center"
                     ]
                   },
                   "depth" : 0,
@@ -420,7 +418,7 @@
                     {
                       "length" : 15,
                       "offset" : 0,
-                      "style" : "ALIGN:left"
+                      "style" : "ALIGN:center"
                     }
                   ],
                   "key" : "54o89",
@@ -433,9 +431,9 @@
                 "os" : "10_13",
                 "size" : {
                   "height" : 19,
-                  "width" : 104
+                  "width" : 376
                 },
-                "width" : 0
+                "width" : 375
               },
               "entityMap" : {
 
@@ -444,10 +442,8 @@
             "targetName" : "path_label",
             "top" : 296,
             "visible" : true,
-            "width" : 104,
-            "widthFactor" : null,
-            "x" : 230,
-            "y" : 340
+            "width" : 375,
+            "widthFactor" : null
           }
         ],
         "clip" : true,
