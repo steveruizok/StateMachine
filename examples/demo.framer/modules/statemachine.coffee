@@ -46,7 +46,7 @@
 class exports.StateMachine extends Framer.BaseClass
 	constructor: (options = {}) ->
 		_.assign @,
-			_states: []
+			_states: {}
 			_current: undefined
 			_history: []
 			_historyIndex: 0
@@ -57,6 +57,9 @@ class exports.StateMachine extends Framer.BaseClass
 		@states = options.states
 	
 	# Private methods
+	
+	_getCurrent: =>
+		return @_current
 	
 	_setCurrent: (state, payload, direction) =>
 		return unless state?
@@ -72,32 +75,58 @@ class exports.StateMachine extends Framer.BaseClass
 					@_historyIndex++
 		
 		@_current = state
+
 		@emit("change:current", state.name, payload, @)
 		@emit("change:state", state.name, payload, @)
 	
-	_getCurrent: =>
-		return @_getState(@current)
-		
-	_getState: (stateName) =>
-		return _.find(@states, {name: stateName})
+	_getNewState: (stateName) =>
+		path = @_current.path.split('.')
+
+		handleState = (state) ->
+			if typeof state is "function"
+				return state()
+			else
+				return state
+
+
+		getAtPath = (array) =>
+			if array.length is 0
+				unless @states[stateName]
+					throw "Couldn't find that state."
+					return
+
+				return @states[stateName]
+
+			path = array.join('.')
+			state = _.get(@states, path)
+
+			if state?.states[stateName]
+				return state.states[stateName]
+
+			getAtPath(_.dropRight(array))
+
+		newState = getAtPath(path)
+		return newState
+
 		
 	_setInitialStates: =>
 		if @initial
-			state = _.find(@states, {name: @initial})
+			state = _.get(@states, @initial)
 			if state?
 				@_current = state
 				Utils.delay 0, => @_setCurrent(state)
 				return
-		
-		@_current = @states[0]
-		Utils.delay 0, => @_setCurrent(@states[0])
+
+		# first = _.keys(@states)
+		@_current = @states[_.keys(@states)[0]]
+		Utils.delay 0, => @_setCurrent(@_current)
 		
 	_addToHistory: (stateName, payload) =>
 		@_history = @_history.slice(0, @_historyIndex)
 		@_history.push({name: stateName, payload: payload})
 	
 	_setState: (stateName, payload, direction) =>
-		state = @_getState(stateName)
+		state = @_getNewState(stateName)
 		
 		unless state?
 			return;
@@ -109,11 +138,13 @@ class exports.StateMachine extends Framer.BaseClass
 	
 	dispatch: (actionName, payload) =>
 		current = @_getCurrent()
+
 		newStateName = current.actions[actionName]
+		if typeof newStateName is "function" then newStateName = newStateName()
 		
 		if _.isUndefined(newStateName)
 			return
-		
+
 		@_setState(newStateName, payload)
 		
 	undo: =>
@@ -141,14 +172,14 @@ class exports.StateMachine extends Framer.BaseClass
 		get: -> return @_historyIndex
 		
 	@define "state",
-		get: -> return @current
+		get: -> return @current.name
 		set: (stateName) ->
 			return unless stateName?
 			
 			@_setState(stateName)
 		
 	@define "current",
-		get: -> return (@_current ? @initial)?.name ? undefined
+		get: -> return @_current
 		
 	@define "initial",
 		get: -> return @_initial
@@ -157,12 +188,40 @@ class exports.StateMachine extends Framer.BaseClass
 	
 	@define "states",
 		get: -> @_states
-		set: (states) ->
-			newStates = _.map(states, (value, key) =>
-				return {name: key, actions: value}
-				)
+		set: (newStates) ->
+
+			getStates = (statesObject, target) =>
+				target._states = {}
+
+				markupState = (value, key, obj) =>
+					state =
+						name: key
+						path: undefined
+						states: {}
+						actions: {}
+					
+					if obj.path 
+						state.path = obj.path + "." + key
+					else
+						state.path = key
+							
+					_.forEach value, (v, k) =>
+						switch typeof v
+							when "string"
+								state.actions[k] = v
+							when "function"
+								state.actions[k] = v
+							when "object"
+								state.states[k] = markupState(v, k, state)
+					
+					return state
+		
+				_.forEach statesObject, (v, k) -> 
+					target._states[k] = markupState(v, k, statesObject)
+					
+				return target
 			
-			@_states = newStates
-			
+			getStates(newStates, @)
+
 			# set initial state (delayed for listeners)
 			@_setInitialStates()
