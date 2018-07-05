@@ -206,7 +206,7 @@ button.machine.onStateChange (state) ->
 
 ### Tape player
 
-[Click here](https://framer.cloud/EJyMs) to view and download this example on Framer Cloud.
+[Click here](https://framer.cloud/qToHd/) to view and download this example on Framer Cloud.
 
 # Documentation
 
